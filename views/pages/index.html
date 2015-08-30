@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>getcoffe</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>getcoffe</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/base.css" rel="stylesheet" />
 </head>
-<body>
-	<p>Test</p>
+<body ng-controller="RootController">
+    <header ng-include="menu"></header>
+	<div class="container-fluid wrapper">
+        <div class="row">
+			<div class="col-md-12">
+				<div class="mainImage">
+                    <img src="img/main.JPG" />
+					<button class="btn btn-success demoButton">DEMO</button>
+				</div>
+				<div class="appView">
+                    
+				</div>
+			</div>
+		</div>
+    </div>
+	<footer>
+		<p>copyright@by TAK</p>
+	</footer>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services/view-service.js"></script>
+    <script src="js/controllers/root-controller.js"></script>
 </body>
 </html>

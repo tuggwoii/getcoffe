@@ -1,0 +1,21 @@
+{
+  "name": "getcoffe",
+  "description": "getcoffe project",
+  "main": [],
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "angularjs#~1.4.5",
+    "bootstrap": "~3.3.5"
+  },
+  "authors": [
+    "Tak <tugg.solo@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
