@@ -42,3 +42,20 @@ header {
     left:50%;
     margin-left:-150px;
 }
+.box {
+    height: 200px;
+    background:#ccc;
+    box-sizing:border-box;
+    padding:10px;
+}
+.box h2 {
+    padding:0;
+    margin:0;
+}
+.logo {
+    padding:50px 50px;
+    height:200px;
+}
+.logo img {
+   max-width:100%;
+}
