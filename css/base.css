@@ -101,7 +101,7 @@ footer p {
    max-height: 100px;
    position: relative;
    top: 50%;
-   transform: translateY(-50%);
+   margin-top: -50%px;
 }
 h2 {
     font-size:22px;
