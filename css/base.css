@@ -116,10 +116,15 @@ h2 {
 .poweredBy {
     padding-bottom: 50px;
 }
+@media (min-width: 992px)v{
+    .logo {
+        padding-top: 60px;
+    }
+}
 @media screen and (max-width: 540px) {
     .logo {
         height:130px;
-        padding-top: 65px;
+        padding-top: 0px;
     }
     .logo img {
        max-width:100%;
