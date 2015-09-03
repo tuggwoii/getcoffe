@@ -9,6 +9,8 @@
 	<link href="css/base.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
     <link href="css/animate.css" rel="stylesheet" />
+    <link href="bower_components/components-font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
 </head>
 <body ng-controller="RootController">
     <header ng-include="menu" class="fixed"></header>
@@ -39,7 +41,9 @@
                     </div>
                     <div class="demoView">
                         <img id="frame" class="frame" src="img/frame.png" ng-click="bootsApp()" />
-                        <div class="appScreen animated zoomIn" ng-if="appStart"></div>
+                        <div class="appScreen animated zoomIn" ng-if="appStart">
+                            <div class="demoAppView" ng-controller="AppController" ng-include="appView"></div>
+                        </div>
                         <div class="appDescription animated bounceIn" ng-if="appReady" ng-click="bootsApp()">Tap on the iPhone to start the app.</div>
                     </div>
                 </div>
@@ -83,6 +87,7 @@
         <p>Contact: </p>
 	</footer>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/iscroll.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -90,8 +95,10 @@
     <script src="js/services/view-service.js"></script>
     <script src="js/services/menu-service.js"></script>
     <script src="js/services/demonstrate-service.js"></script>
+    <script src="js/services/app-service.js"></script>
     <script src="js/controllers/root-controller.js"></script>
     <script src="js/controllers/menu-controller.js"></script>
     <script src="js/controllers/demonstrate-controller.js"></script>
+    <script src="js/controllers/app-controller.js"></script>
 </body>
 </html>

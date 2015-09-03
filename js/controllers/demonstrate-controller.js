@@ -3,6 +3,7 @@
     $scope.bootsApp = function () {
         if (!$scope.appStart) {
             $scope.appStart = true;
+            $scope.appView = ViewService.getAppView();
         }       
     };
 

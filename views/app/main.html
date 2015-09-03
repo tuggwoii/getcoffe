@@ -1,0 +1,36 @@
+<div class="title">
+    <span class="appName">Māfæ</span>
+    <span class="search">
+        <input type="text" placeholder="Search..." />
+        <i class="fa fa-search"></i>
+    </span>
+</div>
+<div class="body">
+    <div id="wrapper" class="listView">
+
+            <ul>
+                <li ng-repeat="shop in app.shops">
+                    <img ng-src="{{shop.image}}" />
+                    <div class="shopInfo">
+                        <span class="shopName">{{shop.name}}</span>
+                        <span class="distance">Distance: {{shop.distance}} km</span>
+                    </div>
+                    <div class="status">
+                        <img class="pin" src="img/green-pin.png" ng-if="!shop.close && !shop.promotion" />
+                        <span ng-if="!shop.close && !shop.promotion">OPEN</span>
+                        <img class="pin" src="img/red-pin.png" ng-if="shop.close" />
+                        <span ng-if="shop.close">CLOSE</span>
+                        <img class="pin" src="img/green-pin.png" ng-if="shop.promotion && !shop.close" />
+                        <span ng-if="shop.promotion">PROMOTION</span>
+                    </div>
+                </li>
+            </ul>
+    
+    </div>
+</div>
+<div class="menu">
+    <div class="menuIcon  {{menu.cssclass}} {{menu.active? 'active':''}}" ng-repeat="menu in app.menuItem" ng-click="menuClick(menu)">
+        <i class="fa {{menu.icon}}"></i>
+        <span>{{menu.text}}</span>
+    </div>
+</div>

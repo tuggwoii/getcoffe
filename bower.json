@@ -5,8 +5,9 @@
   "dependencies": {},
   "devDependencies": {
     "angular": "angularjs#~1.4.5",
+    "angular-animate": "~1.4.5",
     "bootstrap": "~3.3.5",
-    "angular-animate": "~1.4.5"
+    "components-font-awesome": "~4.4.0"
   },
   "authors": [
     "Tak <tugg.solo@gmail.com>"
