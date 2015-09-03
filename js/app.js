@@ -1,4 +1,4 @@
-﻿var getcoffe = angular.module('app',[]);
+﻿var getcoffe = angular.module('app', ['ngAnimate']);
 app = {
     module: {},
     onInit: function () {

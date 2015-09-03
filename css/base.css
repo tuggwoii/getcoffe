@@ -14,6 +14,11 @@ header {
     z-index: 1;
     top:0;
 }
+header.fixed {
+    position:fixed;
+    top:0;
+    left:0;
+}
 footer {
     box-sizing:border-box;
     padding: 15px 15px;
@@ -117,6 +122,63 @@ h2 {
 }
 .poweredBy {
     padding-bottom: 50px;
+}
+.navbar-brand {
+    font-size:40px;
+}
+.popup {
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:52px;
+    left:0;
+    background-color:#fff;
+    z-index: 2;
+    animation-duration: .5s !important;
+}
+.popup.ng-leave {
+  animation: zoomOut .5s;
+}
+.closePanel {
+    width: 25px;
+    color: #000;
+    cursor: pointer;
+    margin: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index:5;
+}
+.appDescription {
+    position: absolute;
+    left: 35px;
+    color: #fff;
+    top: 260px;
+    font-size: 16px;
+    animation-duration: .75s !important;
+}
+.closePanel img {
+    max-width:100%;
+}
+.demoView {
+    width: 300px;
+    margin: 30px auto;
+    height:100%;
+    position:relative;
+}
+.demoView img {
+    max-width:100%;
+    position: relative;
+}
+.appScreen {
+    width: 273px;
+    height: 445px;
+    position: absolute;
+    top: 67px;
+    left: 14px;
+    background-color: #fff;
+    animation-duration: .5s !important;
+    border-radius: 2px;
 }
 @media (max-width: 992px) {
     .logo {
