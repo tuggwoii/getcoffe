@@ -136,7 +136,7 @@ h2 {
     z-index: 2;
     animation-duration: .5s !important;
 }
-.popup.ng-leave {
+.popup.animate-leave.ng-leave-active {
   animation: zoomOut .5s;
 }
 .closePanel {

@@ -9,15 +9,12 @@ getcoffe.controller('AppController', function ($rootScope, $scope, $timeout, Vie
             var myScroll;
 
             myScroll = new IScroll('#wrapper', {
-                scrollbars: false,
                 mouseWheel: true,
-                interactiveScrollbars: true,
-                fadeScrollbars: false
+                interactiveScrollbars: true
             });
 
-            document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
         }, 500);
+
     };
 
     $scope.clearMenuActive = function () {
