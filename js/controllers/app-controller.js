@@ -11,7 +11,7 @@ getcoffe.controller('AppController', function ($rootScope, $scope, $timeout, Vie
                 mouseWheel: true,
                 interactiveScrollbars: true
             });
-        }, 1000);
+        }, 2000);
 
     };
 
