@@ -7,13 +7,11 @@ getcoffe.controller('AppController', function ($rootScope, $scope, $timeout, Vie
         $scope.app.shops = AppService.getShops();
         $timeout(function () {
             var myScroll;
-
             myScroll = new IScroll('#wrapper', {
                 mouseWheel: true,
                 interactiveScrollbars: true
             });
-
-        }, 500);
+        }, 1000);
 
     };
 

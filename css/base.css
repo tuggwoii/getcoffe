@@ -136,7 +136,7 @@ h2 {
     z-index: 2;
     animation-duration: .5s !important;
 }
-.popup.animate-leave.ng-leave-active {
+.popup.ng-leave {
   animation: zoomOut .5s;
 }
 .closePanel {
@@ -156,7 +156,6 @@ h2 {
     top: 260px;
     font-size: 16px;
     animation-duration: .75s !important;
-    -webkit-transform-style: preserve-3d;
 }
 .closePanel img {
     max-width:100%;
@@ -179,7 +178,6 @@ h2 {
     left: 14px;
     background-color: #fff;
     animation-duration: .5s !important;
-    -webkit-transform-style: preserve-3d;
     border-radius: 2px;
     z-index: 99;
 }
