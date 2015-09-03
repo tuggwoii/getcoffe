@@ -35,13 +35,13 @@
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6 box blue">
                 <h2>Demonstrate</h2>
-                <div class="popup demonstrate animated zoomIn" ng-controller="DemonstrateController" ng-if="popup.demonstrate">
+                <div class="popup demonstrate animated {{popup.demonstrate? 'zoomIn':'zoomOut'}}" ng-controller="DemonstrateController" ng-if="popup.demonstrate">
                     <div class="closePanel" ng-click="close()">
                         <img src="img/close.png" />
                     </div>
                     <div class="demoView">
                         <img id="frame" class="frame" src="img/frame.png" ng-click="bootsApp()" />
-                        <div class="appScreen animated zoomIn" ng-if="appStart">
+                        <div class="appScreen animated {{appStart? 'zoomIn':''}}" ng-if="appStart">
                             <div class="demoAppView" ng-controller="AppController" ng-include="appView"></div>
                         </div>
                         <div class="appDescription animated bounceIn" ng-if="appReady" ng-click="bootsApp()">Tap on the iPhone to start the app.</div>

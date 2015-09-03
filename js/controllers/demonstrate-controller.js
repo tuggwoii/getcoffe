@@ -18,6 +18,7 @@
     $scope.close = function () {
         $scope.popup.demonstrate = false;
         $rootScope.$broadcast('clearMenuActive');
+        $('.demonstrate').addClass('zoomOut');
     };
 
     $scope.onStartup();
