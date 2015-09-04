@@ -52,7 +52,7 @@
     padding: 5px;
     height: 25px;
     font-size: 14px;
-    width: 185px;
+    width: 220px;
     position: relative;
     top: -1px;
     border-radius: 2px;
@@ -63,12 +63,12 @@
 .demoAppView .body {
     display: inline-block;
     width: 100%;
-    height: 366px;
+    height: 481px;
     overflow: hidden;
 }
 .listView ul,.listView li {
     padding: 0;
-    margin: :0;
+    margin: 0;
     list-style: none;
 }
 .listView li {
@@ -80,31 +80,39 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    height: 80px;
+    cursor:pointer;
 }
 .listView li img {
-    width:50px;
+    width:100%;
+    vertical-align: middle;
+    height: 100%;
 }
 .shopName {
-    font-size: 14px;
+    font-size: 17px;
     color:#000;
 }
 .distance {
     display: block;
-    font-size: 13px;
-    color:#ccc;
+    font-size: 14px;
+    color:#aaa;
 }
-.shopInfo {
+.listView .shopInfo {
     margin-left: 5px;
     display: inline-block;
     position: relative;
-    top: 8px;
-    width: 50%;
+    top: 10px;
+    width: 58%;
+    float:left;
 }
 .listView {
     
 }
 .listView img.pin {
     width: 25px;
+}
+.pin {
+    cursor:pointer;
 }
 .listView .status {
     display: inline-block;
@@ -117,4 +125,69 @@
 .listView .status span {
     font-size: 10px;
     display: block;
+}
+.listView .shopImage {
+    float:left;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    overflow:hidden;
+    margin-top:8px;
+}
+.mapView .status img {
+    width:25px;
+}
+.mapView ul {
+    position:absolute;
+    left:0;
+    top:0;
+}
+.mapView ul li {
+   width:85px;
+   color:#fff;
+   text-align:center;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+.mapView .shopInfo {
+    width:100%;
+    padding:0 2px;
+    background-color:#fff;
+    border-radius:3px;
+    box-shadow: #ccc 1px 1px 0px 1px;
+    margin-bottom: 3px;
+}
+.mapView .shopInfo .shopName
+{
+    font-size: 12px;
+}
+.shopView {
+     -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.shopView .shopImage {
+    border-bottom:1px solid #ccc;
+}
+.shopView .shopName {
+    font-size: 18px;
+    color: #6F4E37;
+    padding: 7px;
+    border-bottom: 1px solid #6F4E37;
+    font-weight: bold;
+}
+.shopView .description {
+    padding: 5px 10px;
+    border-bottom: 1px solid #6F4E37;
+}
+.shopView .edit {
+    position: absolute;
+    color: #fff;
+    top: 187px;
+    right: 5px;
+    font-size: 15px;
+    cursor: pointer;
 }

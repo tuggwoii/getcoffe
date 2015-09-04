@@ -6,11 +6,14 @@
     </span>
 </div>
 <div class="body">
-    <div id="wrapper" class="listView">
+    <div id="wrapper" class="listView" ng-if="app.view=='list'">
 
             <ul>
-                <li ng-repeat="shop in app.shops">
-                    <img ng-src="{{shop.image}}" />
+                <li ng-repeat="shop in app.shops" ng-click="openDetail(shop)">
+                    <div class="shopImage">
+                        <img ng-src="{{shop.image}}" />
+                    </div>
+                   
                     <div class="shopInfo">
                         <span class="shopName">{{shop.name}}</span>
                         <span class="distance">Distance: {{shop.distance}} km</span>
@@ -20,13 +23,98 @@
                         <span ng-if="!shop.close && !shop.promotion">OPEN</span>
                         <img class="pin" src="img/red-pin.png" ng-if="shop.close" />
                         <span ng-if="shop.close">CLOSE</span>
-                        <img class="pin" src="img/green-pin.png" ng-if="shop.promotion && !shop.close" />
+                        <img class="pin" src="img/pro-pin.png" ng-if="shop.promotion && !shop.close" />
                         <span ng-if="shop.promotion">PROMOTION</span>
                     </div>
                 </li>
             </ul>
     
     </div>
+
+    <div class="mapView" ng-if="app.view=='map'">
+        <img src="img/map.png" />
+        <ul>
+            <li ng-repeat="shop in app.shops" style="left:{{shop.x}}px;top:{{shop.y}}px;" ng-click="openDetail(shop)">
+                <div class="shopInfo">
+                    <span class="shopName">{{shop.name}}</span>
+                </div>
+                <div class="status">
+                    <img class="pin" src="img/green-pin.png" ng-if="!shop.close && !shop.promotion" />
+                    <img class="pin" src="img/red-pin.png" ng-if="shop.close" />
+                    <img class="pin" src="img/pro-pin.png" ng-if="shop.promotion && !shop.close" />
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="shopView" ng-if="app.view=='detail'">
+        <div class="shopImage">
+            <img src="img/main.png" />
+        </div>
+        <div class="shopName">
+           <span><i class="fa fa-coffee"></i> {{currentShop.name}}</span>
+        </div>
+        <div class="description">
+            ร้านกาแฟสำหรับนักท่องเที่ยวและนักศึกษา เหมาะสำหรับทำงานและการอ่านหนังสือ เปิด 24 ชั่วโมง
+        </div>
+        <div class="shopName">
+           <span>สถานะ: <span>เปิดให้บริการ</span></span>
+        </div>
+        <div class="shopName">
+            <i class="fa fa-certificate"></i></i> Promotions</span>
+        </div>
+        <div class="description">
+            <ul>
+                <li>มา 2 ฟรี 1 - ถึง 20/08/2015 18:00</li>
+                <li>Espresso ลด 50% - ถึง 20/08/2015 18:00</li>
+            </ul>
+        </div>
+        <div class="shopName">
+            <i class="fa fa-certificate"></i></i> Menu</span>
+        </div>
+        <div class="description">
+            <ul>
+                <li>Espresso 55 บาท</li>
+                <li>Americano 100 บาท</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="shopView" ng-if="app.view=='owner'">
+        <div class="shopImage">
+            <img src="img/main.png" />
+            <div class="edit"><i class="fa fa-cog"></i> Update</div>
+        </div>
+        <div class="shopName">
+           <span><i class="fa fa-coffee"></i> {{currentShop.name}}</span>
+        </div>
+        <div class="description">
+            ร้านกาแฟสำหรับนักท่องเที่ยวและนักศึกษา เหมาะสำหรับทำงานและการอ่านหนังสือ เปิด 24 ชั่วโมง
+        </div>
+        <div class="shopName">
+           <span>สถานะ: <span>เปิดให้บริการ</span></span>
+        </div>
+        <div class="shopName">
+            <i class="fa fa-certificate"></i></i> Promotions</span>
+        </div>
+        <div class="description">
+            <ul>
+                <li>มา 2 ฟรี 1 - ถึง 20/08/2015 18:00</li>
+                <li>Espresso ลด 50% - ถึง 20/08/2015 18:00</li>
+            </ul>
+        </div>
+        <div class="shopName">
+            <i class="fa fa-certificate"></i></i> Menu</span>
+        </div>
+        <div class="description">
+            <ul>
+                <li>Espresso 55 บาท</li>
+                <li>Americano 100 บาท</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 <div class="menu">
     <div class="menuIcon  {{menu.cssclass}} {{menu.active? 'active':''}}" ng-repeat="menu in app.menuItem" ng-click="menuClick(menu)">
