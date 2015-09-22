@@ -1,6 +1,7 @@
 .demoAppView {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 .demoAppView .menu {
     position: absolute;
@@ -172,7 +173,7 @@
 .shopView .shopImage {
     border-bottom:1px solid #ccc;
 }
-.shopView .shopName {
+.shopView .sectionName {
     font-size: 18px;
     color: #6F4E37;
     padding: 7px;
@@ -189,5 +190,212 @@
     top: 187px;
     right: 5px;
     font-size: 15px;
+    cursor: pointer;
+}
+.closed {
+    color:red;
+}
+.setting {
+    position: absolute;
+    width:100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background: #fff;
+    -webkit-animation-duration: 0.5s !important;
+    animation-duration: 0.3s !important;
+    padding: 30px 15px;
+}
+.setting.ng-leave {
+    animation: slideOutDown 0.5s;
+}
+.setting h2 {
+    color:#ccc;
+    text-align: left;
+}
+.shopView {
+    position: relative;
+}
+.appScreen {
+    width: 342px;
+    height: 560px;
+    position: absolute;
+    top: 86px;
+    left: 20px;
+    background-color: #fff;
+    animation-duration: .5s !important;
+    border-radius: 2px;
+    z-index: 99;
+}
+.manage {
+    float: right;
+    margin-left: 10px;
+    font-size: 15px;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+}
+.toggle-button {
+    width: 55px;
+    height: 30px;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    display: inline-block;
+    margin-left: 38px;
+    position: relative;
+    top: 18px;
+    cursor: pointer;
+}
+.setting .on {
+    background: green;
+    height: 26px;
+    width: 26px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px 0px #ccc;
+    display: inline-block;
+    float: left;
+}
+.setting .off {
+    background: #ccc;
+    height: 26px;
+    width: 26px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px 0px #ccc;
+    display: inline-block;
+    float: right;
+}
+.field {
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+}
+.field input {
+    width:170px;
+    float:right;
+}
+.field textarea {
+    width:170px;
+    float:right;
+    height: 160px;
+}
+select.time {
+    width: 32%;
+    padding: 0 5px;
+    display: inline-block;
+}
+.timepicker {
+    display: inline-block;
+    width:170px;
+    float:right;
+}
+label {
+    position: relative;
+    top:8px;
+}
+.toggle-field {
+    margin-bottom: 15px;
+}
+.shoptime span {
+    font-size: 14px;
+}
+.nav-tabs {
+    margin-top: 20px;
+}
+.nav-tabs li a {
+    padding: 5px 15px;
+    color: #555;
+    font-size: 15px;
+    font-weight: bold;
+}
+.table {
+    margin-top: 20px;
+}
+.table thead td {
+    font-weight: bold;
+}
+.tabDetail ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.tabDetail li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+.tabDetail li .delete {
+    color: red;
+    float: right;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    cursor: pointer;
+}
+.tabDetail li .delete span {
+    font-size: 16px;
+}
+.tabDetail .table .delete {
+    color: red;
+    cursor: pointer;
+}
+.tabDetail .table .delete span {
+    font-size: 14px;
+}
+.tabDetail .table .delete i {
+    font-size: 20px;
+}
+.tabDetail li .delete .fa {
+    font-size: 20px;
+}
+.tabDetail .form-group {
+    margin-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+}
+.tabDetail .table .form-group {
+    display: table-row;
+}
+.tabDetail .form-group .timepicker {
+    width: 220px;
+}
+.addbutton {
+    margin-top: 10px;
+    width:100%;
+}
+.nav>li>a:focus {
+    background-color: none;
+}
+.exp {
+    font-size: 13px;
+    font-style: italic;
+}
+.pushNotification {
+    -webkit-animation-duration: 0.75s !important;
+    animation-duration: 0.75s !important;
+    position: relative;
+    background: #eee;
+    border-radius: 10px;
+    z-index: 5;
+    width: 96%;
+    left: 2%;
+    padding: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+.pushNotification.ng-leave {
+    animation: slideOutUp 0.75s;
+    
+}
+.pushRemove {
+    position: absolute;
+    right: 5px;
+    top:2px;
+    color:#ccc;
     cursor: pointer;
 }

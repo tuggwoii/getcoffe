@@ -1,40 +1,54 @@
-<div class="title">
+
+ <div class="pushNotification animated slideInDown" ng-if="displayNotification" ng-click="pushClick()">
+         <i class="fa fa-times pushRemove" ng-click="clearPushNotification()"></i>
+        <span>ทางร้าน {{app.pushNotification.name}} ได้จัดโปรโมชั่นดังนี้: </span>
+        <ul>
+            <li ng-repeat="p in app.pushNotification.promotions">{{p.name}}</li>
+        </ul>
+</div>
+<div class="appBody">
+    <div class="title">
     <span class="appName">Māfæ</span>
-    <span class="search">
-        <input type="text" placeholder="Search..." />
+    <span class="search" ng-show="app.view=='map' || app.view=='list'">
+        <input type="text" placeholder="Search..." ng-model="searchText" ng-keyup="setScroll()" />
         <i class="fa fa-search"></i>
+    </span>
+    <span class="manage" ng-click="openSetting()" ng-if="app.view=='owner'">
+        <i class="fa fa-cog"></i> ตั้งค่า
+    </span>
+    <span class="manage" ng-click="openInfo()" ng-if="app.view=='owner'">
+        <i class="fa fa-pencil-square-o"></i> แก้ไขข้อมูล
     </span>
 </div>
 <div class="body">
     <div id="wrapper" class="listView" ng-if="app.view=='list'">
+        <ul>
+            <li ng-repeat="shop in app.shops | filter:searchText" ng-click="openDetail(shop)">
+                <div class="shopImage">
+                    <img ng-src="{{shop.image}}" />
+                </div>
 
-            <ul>
-                <li ng-repeat="shop in app.shops" ng-click="openDetail(shop)">
-                    <div class="shopImage">
-                        <img ng-src="{{shop.image}}" />
-                    </div>
-                   
-                    <div class="shopInfo">
-                        <span class="shopName">{{shop.name}}</span>
-                        <span class="distance">Distance: {{shop.distance}} km</span>
-                    </div>
-                    <div class="status">
-                        <img class="pin" src="img/green-pin.png" ng-if="!shop.close && !shop.promotion" />
-                        <span ng-if="!shop.close && !shop.promotion">OPEN</span>
-                        <img class="pin" src="img/red-pin.png" ng-if="shop.close" />
-                        <span ng-if="shop.close">CLOSE</span>
-                        <img class="pin" src="img/pro-pin.png" ng-if="shop.promotion && !shop.close" />
-                        <span ng-if="shop.promotion">PROMOTION</span>
-                    </div>
-                </li>
-            </ul>
-    
+                <div class="shopInfo">
+                    <span class="sectionName">{{shop.name}}</span>
+                    <span class="distance">Distance: {{shop.distance}} km</span>
+                </div>
+                <div class="status">
+                    <img class="pin" src="img/green-pin.png" ng-if="!shop.close && !shop.promotion" />
+                    <span ng-if="!shop.close && !shop.promotion">OPEN</span>
+                    <img class="pin" src="img/red-pin.png" ng-if="shop.close" />
+                    <span ng-if="shop.close">CLOSE</span>
+                    <img class="pin" src="img/pro-pin.png" ng-if="shop.promotion && !shop.close" />
+                    <span ng-if="shop.promotion && !shop.close ">PROMOTION</span>
+                </div>
+            </li>
+        </ul>
+        <p ng-hide="app.shops.length">Nothing here!</p>
     </div>
 
     <div class="mapView" ng-if="app.view=='map'">
         <img src="img/map.png" />
         <ul>
-            <li ng-repeat="shop in app.shops" style="left:{{shop.x}}px;top:{{shop.y}}px;" ng-click="openDetail(shop)">
+            <li ng-repeat="shop in app.shops | filter:searchText" style="left:{{shop.x}}px;top:{{shop.y}}px;" ng-click="openDetail(shop)">
                 <div class="shopInfo">
                     <span class="shopName">{{shop.name}}</span>
                 </div>
@@ -49,76 +63,356 @@
     </div>
 
     <div class="shopView" ng-if="app.view=='detail'">
-        <div class="shopImage">
-            <img src="img/main.png" />
-        </div>
-        <div class="shopName">
-           <span><i class="fa fa-coffee"></i> {{currentShop.name}}</span>
-        </div>
-        <div class="description">
-            ร้านกาแฟสำหรับนักท่องเที่ยวและนักศึกษา เหมาะสำหรับทำงานและการอ่านหนังสือ เปิด 24 ชั่วโมง
-        </div>
-        <div class="shopName">
-           <span>สถานะ: <span>เปิดให้บริการ</span></span>
-        </div>
-        <div class="shopName">
-            <i class="fa fa-certificate"></i></i> Promotions</span>
-        </div>
-        <div class="description">
-            <ul>
-                <li>มา 2 ฟรี 1 - ถึง 20/08/2015 18:00</li>
-                <li>Espresso ลด 50% - ถึง 20/08/2015 18:00</li>
-            </ul>
-        </div>
-        <div class="shopName">
-            <i class="fa fa-certificate"></i></i> Menu</span>
-        </div>
-        <div class="description">
-            <ul>
-                <li>Espresso 55 บาท</li>
-                <li>Americano 100 บาท</li>
-            </ul>
+        <div id="wrapper">
+            <div class="scroll">
+                <div class="shopImage">
+                    <img src="img/main.png" />
+                </div>
+                <div class="sectionName">
+                    <span><i class="fa fa-coffee"></i> {{currentShop.name}}</span>
+                </div>
+                <div class="description">
+                    {{currentShop.description}}
+                </div>
+                <div class="sectionName">
+                    <span>สถานะ: <span ng-if="!currentShop.close">เปิดให้บริการ</span> <span ng-if="currentShop.close" class="closed">ปิดบริการ</span></span>
+                    <div>
+                        <div class="shoptime"><span>เวลาเปิด:</span><span ng-if="currentShop.openTime.h && currentShop.openTime.m && currentShop.openTime.z"> {{currentShop.openTime.h}}:{{currentShop.openTime.m}} {{currentShop.openTime.z}}</span></div>
+                        <div  class="shoptime"><span>เวลาเปิด:</span><span ng-if="currentShop.closeTime.h && currentShop.closeTime.m && currentShop.closeTime.z"> {{currentShop.closeTime.h}}:{{currentShop.closeTime.m}} {{currentShop.closeTime.z}}</span></div>
+                    </div>
+                </div>
+                <div class="sectionName">
+                    <i class="fa fa-certificate"></i><span> Promotions</span>
+                </div>
+                <div class="description">
+                    <ul>
+                      <li ng-repeat="p in currentShop.promotions">{{p.name}} <span class="exp" ng-if="p.exp.h && p.exp.m && p.exp.z">- ถึง {{p.exp.h}}:{{p.exp.m}} {{p.exp.z}}</span><span class="exp" ng-if="p.exp.d && p.exp.mo && p.exp.y">, {{p.exp.d}}/{{p.exp.mo}}/{{p.exp.y}}</span></li>
+                    </ul>
+                </div>
+                <div class="sectionName">
+                    <i class="fa fa-pencil-square-o"></i> Menu</span>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li ng-repeat="m in currentShop.menu">{{m.name}} {{m.price}} บาท</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="shopView" ng-if="app.view=='owner'">
-        <div class="shopImage">
-            <img src="img/main.png" />
-            <div class="edit"><i class="fa fa-cog"></i> Update</div>
+        <div id="wrapper">
+            <div class="scroll">
+                <div class="shopImage">
+                    <img src="img/main.png" />
+                </div>
+                <div class="sectionName">
+                    <span><i class="fa fa-coffee"></i> {{currentShop.name}}</span>
+                </div>
+                <div class="description">
+                    {{currentShop.description}}
+                </div>
+                <div class="sectionName">
+                    <span>สถานะ: <span ng-if="!currentShop.close">เปิดให้บริการ</span> <span ng-if="currentShop.close" class="closed">ปิดบริการ</span></span>
+                    <div>
+                        <div  class="shoptime"><span>เวลาเปิด:</span><span ng-if="currentShop.openTime.h && currentShop.openTime.m && currentShop.openTime.z"> {{currentShop.openTime.h}}:{{currentShop.openTime.m}} {{currentShop.openTime.z}}</span></div>
+                        <div  class="shoptime"><span>เวลาเปิด:</span><span ng-if="currentShop.closeTime.h && currentShop.closeTime.m && currentShop.closeTime.z"> {{currentShop.closeTime.h}}:{{currentShop.closeTime.m}} {{currentShop.closeTime.z}}</span></div>
+                    </div>
+                </div>
+                <div class="sectionName">
+                    <i class="fa fa-certificate"></i><span> Promotions</span>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li ng-repeat="p in currentShop.promotions">{{p.name}} <span class="exp" ng-if="p.exp.h && p.exp.m && p.exp.z">- ถึง {{p.exp.h}}:{{p.exp.m}} {{p.exp.z}}</span><span class="exp" ng-if="p.exp.d && p.exp.mo && p.exp.y">, {{p.exp.d}}/{{p.exp.mo}}/{{p.exp.y}}</span></li>
+                    </ul>
+                </div>
+                <div class="sectionName">
+                    <i class="fa fa-pencil-square-o"></i> Menu</span>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li ng-repeat="m in currentShop.menu">{{m.name}} {{m.price}} บาท</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="shopName">
-           <span><i class="fa fa-coffee"></i> {{currentShop.name}}</span>
+        <div class="setting animated slideInUp form-group" ng-if="showSetting">
+            <div class="closePanel" ng-click="closeSetting()">
+                 <img src="img/close.png">
+             </div>
+            <h2>ตั้งค่า</h2>
+            <div class="field toggle-field">
+                <label>เปิดร้าน/ปิดร้าน:</label>
+                <div class="toggle-button" ng-click="toggleOnOff()">
+                    <span class="on" ng-if="!currentShop.close"></span>
+                    <span class="off" ng-if="currentShop.close"></span>
+                </div>
+            </div>
+            <div class="field">
+                <label>ตั้งเปิดร้านอัตโนมัติ:</label>
+                <input type="time" class="form-control" ng-model="currentShop.autoOpen" />
+            </div>
+            <div class="field">
+                <label>ตั้งปิดร้านอัตโนมัติ:</label>
+                <input type="time" class="form-control" ng-model="currentShop.autoClose" />
+            </div>
         </div>
-        <div class="description">
-            ร้านกาแฟสำหรับนักท่องเที่ยวและนักศึกษา เหมาะสำหรับทำงานและการอ่านหนังสือ เปิด 24 ชั่วโมง
-        </div>
-        <div class="shopName">
-           <span>สถานะ: <span>เปิดให้บริการ</span></span>
-        </div>
-        <div class="shopName">
-            <i class="fa fa-certificate"></i></i> Promotions</span>
-        </div>
-        <div class="description">
-            <ul>
-                <li>มา 2 ฟรี 1 - ถึง 20/08/2015 18:00</li>
-                <li>Espresso ลด 50% - ถึง 20/08/2015 18:00</li>
+        <div class="setting animated slideInUp form-group" ng-if="showInfo">
+            <div class="closePanel" ng-click="closeSetting()">
+                 <img src="img/close.png">
+             </div>
+            <div id="innerWrapper">
+            <div class="scroll">
+            
+            <h2 ng-if="tab=='info'">แก้ไขข้อมูลร้าน</h2>
+             <h2 ng-if="tab=='promotion'">แก้ไขข้อมูลโปรโมชั่น</h2>
+             <h2 ng-if="tab=='menu'">แก้ไขข้อมูลเมนู</h2>
+            <ul class="nav nav-tabs">
+              <li role="presentation" class="tab {{tab=='info'?'active':''}}" ng-click="infoTab()"><a href="#">ข้อมูลทั่วไป</a></li>
+              <li role="presentation" class="tab {{tab=='promotion'?'active':''}}" ng-click="promotionTab()"><a href="#">โปรโมชัน</a></li>
+              <li role="presentation" class="tab {{tab=='menu'?'active':''}}" ng-click="menuTab()"><a href="#">เมนู</a></li>
             </ul>
-        </div>
-        <div class="shopName">
-            <i class="fa fa-certificate"></i></i> Menu</span>
-        </div>
-        <div class="description">
-            <ul>
-                <li>Espresso 55 บาท</li>
-                <li>Americano 100 บาท</li>
-            </ul>
+            <div class="tabDetail" ng-if="tab=='info'">
+                <div class="field">
+                <label>ชื่อร้าน:</label>
+                <input type="text" class="form-control" ng-model="currentShop.name" />
+            </div>
+            <div class="field">
+                <label>อธิบายเกี่ยวกับร้าน:</label>
+                <textarea class="form-control" ng-model="currentShop.description" />
+            </div>
+            <div class="field">
+                <label>เวลาเปิด:</label>
+                <div class="timepicker">
+                <select ng-model="currentShop.openTime.h" class="time form-control">
+                    <option>01</option>
+                     <option>02</option>
+                     <option>03</option>
+                     <option>04</option>
+                     <option>05</option>
+                     <option>06</option>
+                     <option>07</option>
+                     <option>08</option>
+                     <option>09</option>
+                     <option>10</option>
+                     <option>11</option>
+                     <option>12</option>
+                </select>
+                <select ng-model="currentShop.openTime.m" class="time form-control">
+                    <option>00</option>
+                     <option>05</option>
+                     <option>10</option>
+                     <option>15</option>
+                     <option>20</option>
+                     <option>25</option>
+                     <option>30</option>
+                     <option>35</option>
+                     <option>40</option>
+                     <option>45</option>
+                     <option>50</option>
+                     <option>55</option>
+                </select>
+                <select ng-model="currentShop.openTime.z" class="time form-control">
+                    <option>AM</option>
+                    <option>PM</option>
+                </select>
+                </div>
+                
+            </div>
+            <div class="field">
+                <label>เวลาปิด:</label>
+                <div class="timepicker">
+                <select ng-model="currentShop.closeTime.h" class="time form-control">
+                     <option>01</option>
+                     <option>02</option>
+                     <option>03</option>
+                     <option>04</option>
+                     <option>05</option>
+                     <option>06</option>
+                     <option>07</option>
+                     <option>08</option>
+                     <option>09</option>
+                     <option>10</option>
+                     <option>11</option>
+                     <option>12</option>
+                </select>
+                <select ng-model="currentShop.closeTime.m" class="time form-control">
+                     <option>00</option>
+                     <option>05</option>
+                     <option>10</option>
+                     <option>15</option>
+                     <option>20</option>
+                     <option>25</option>
+                     <option>30</option>
+                     <option>35</option>
+                     <option>40</option>
+                     <option>45</option>
+                     <option>50</option>
+                     <option>55</option>
+                </select>
+                <select ng-model="currentShop.closeTime.z" class="time form-control">
+                    <option>AM</option>
+                    <option>PM</option>
+                </select>
+                </div>
+            </div>
+            </div>
+            <div class="tabDetail" ng-if="tab=='promotion'">
+                <ul>
+                    <li ng-repeat="p in currentShop.promotions">
+                        <div class="delete">
+                            <span ng-if="p.delete">ยืนยันการลบ <span ng-click="deletePromotion($index)" style="text-decoration:underline;">ลบ</span>/<span ng-click="p.delete=false" style="text-decoration:underline;">ยกเลิก</span></span>
+                            <i class="fa fa-times" ng-if="!p.delete" ng-click="p.delete=true"></i>
+                        </div>
+                        <div class="form-group">
+                             <label>ชื่อโปรโมชั่น:</label>
+                             <input type="text" class="form-control" ng-model="p.name" />
+                        </div>
+                        <div class="form-group">
+                             <label>วันสิ้นสุด:</label>
+                             <div class="timepicker">
+                                <select ng-model="p.exp.d" class="time form-control">
+                                     <option>01</option>
+                                     <option>02</option>
+                                     <option>03</option>
+                                     <option>04</option>
+                                     <option>05</option>
+                                     <option>06</option>
+                                     <option>07</option>
+                                     <option>08</option>
+                                     <option>09</option>
+                                     <option>10</option>
+                                     <option>11</option>
+                                     <option>12</option>
+                                     <option>13</option>
+                                     <option>14</option>
+                                     <option>15</option>
+                                     <option>16</option>
+                                     <option>17</option>
+                                     <option>18</option>
+                                     <option>19</option>
+                                     <option>20</option>
+                                     <option>21</option>
+                                     <option>22</option>
+                                     <option>23</option>
+                                     <option>24</option>
+                                     <option>25</option>
+                                     <option>26</option>
+                                     <option>27</option>
+                                     <option>28</option>
+                                     <option>29</option>
+                                     <option>30</option>
+                                     <option>31</option>
+                                </select>
+                                <select ng-model="p.exp.mo" class="time form-control">
+                                    <option>01</option>
+                                     <option>02</option>
+                                     <option>03</option>
+                                     <option>04</option>
+                                     <option>05</option>
+                                     <option>06</option>
+                                     <option>07</option>
+                                     <option>08</option>
+                                     <option>09</option>
+                                     <option>10</option>
+                                     <option>11</option>
+                                     <option>12</option>
+                                </select>
+                                <select ng-model="p.exp.y" class="time form-control">
+                                     <option>2558</option>
+                                     <option>2559</option>
+                                     <option>2560</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                             <label>เวลาสิ้นสุด:</label>
+                              <div class="timepicker">
+                                <select ng-model="p.exp.h" class="time form-control">
+                                    <option>01</option>
+                                     <option>02</option>
+                                     <option>03</option>
+                                     <option>04</option>
+                                     <option>05</option>
+                                     <option>06</option>
+                                     <option>07</option>
+                                     <option>08</option>
+                                     <option>09</option>
+                                     <option>10</option>
+                                     <option>11</option>
+                                     <option>12</option>
+                                </select>
+                                <select ng-model="p.exp.m" class="time form-control">
+                                    <option>00</option>
+                                     <option>05</option>
+                                     <option>10</option>
+                                     <option>15</option>
+                                     <option>20</option>
+                                     <option>25</option>
+                                     <option>30</option>
+                                     <option>35</option>
+                                     <option>40</option>
+                                     <option>45</option>
+                                     <option>50</option>
+                                     <option>55</option>
+                                </select>
+                                <select ng-model="p.exp.z" class="time form-control">
+                                    <option>AM</option>
+                                    <option>PM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="add">
+                    <button type="button" ng-click="addPromotion()"  class="btn btn-success addbutton">เพิ่มโปรโมชั่น</button>
+                </div>
+                <div class="add">
+                    <button type="button" ng-if="!pushSend"  ng-click="addPush()" class="btn btn-info addbutton">ส่งแจ้งเตือนโปรโมชั่น</button>
+                </div>
+                <div class="add">
+                    <button type="button" ng-if="pushSend" ng-click="addPush()" disabled class="btn btn-info addbutton">ส่งแจ้งเตือนโปรโมชั่นสำเร็จ</button>
+                </div>
+            </div>
+            <div class="tabDetail" ng-if="tab=='menu'">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>ชื่อเมนู</td>
+                            <td>ราคา</td>
+                            <td>ลบ</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="p in currentShop.menu" class="form-group">
+                            <td><input type="text"  class="form-control" ng-model="p.name" /></td>
+                            <td><input type="text" class="form-control" ng-model="p.price" /></td>
+                            <td>
+                                <div class="delete">
+                                <span ng-if="p.delete">ยืนยันการลบ <span ng-click="deleteMenu($index)" style="text-decoration:underline;">ลบ</span>/<span ng-click="p.delete=false" style="text-decoration:underline;">ยกเลิก</span></span>
+                                <i class="fa fa-times" ng-if="!p.delete" ng-click="p.delete=true"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <div class="add">
+                    <button type="button" ng-click="addMenu()" {{currentShop.promotions[currentShop.promotions.length-1].name?'':'disabled'}} class="btn btn-success addbutton">เพิ่มเมนู</button>
+                </div>
+            </div>
+            </div>
+            </div>
         </div>
     </div>
-
+    </div>
 </div>
 <div class="menu">
     <div class="menuIcon  {{menu.cssclass}} {{menu.active? 'active':''}}" ng-repeat="menu in app.menuItem" ng-click="menuClick(menu)">
         <i class="fa {{menu.icon}}"></i>
         <span>{{menu.text}}</span>
     </div>
+</div>
+
 </div>

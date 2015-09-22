@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -21,20 +21,33 @@
                     <img src="img/main.JPG" />
 					<button class="btn btn-success demoButton" ng-click="openDemo()">DEMO</button>
 				</div>
-				<div class="appView">
-                    
-				</div>
-			</div>
-		</div>
-        <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-6 box black">
-                <h2>Problems</h2>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6 box dark">
-                <h2>Solution</h2>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6 box blue">
-                <h2>Demonstrate</h2>
+				<div class="popup contenePopup animated {{popup.content? 'zoomIn':'zoomOut'}}" ng-if="popup.content">
+                    <div class="container">
+                        <div class="closePanel" ng-click="close()">
+                            <img src="img/close.png" />
+                        </div>
+                        <div class="content" ng-if="contentMode=='pb'">
+                            <h1><i class="fa fa-exclamation"></i> Problems</h1>
+                            <p>เนื่องจากในปัจจุบันนั้นร้านกาแฟเป็นที่นิยมเป็นอย่างมากเนื่องด้วยปัจจัยหลายๆอย่าง เช่น ร้านกาแฟนั้นเปรียบเสมือนที่นัดพบปะกับกลุ่มเพื่อนหรือบุคลอื่นเพื่อใช้ในการติดต่องาน เป็นสถานที่ที่สำหรับนั่งทำงาน พักผ่อนและอื่นๆอีกมากมาย ด้วยเหตุนี้จึงทำให้อัตราการเพิ่มจำนวนของร้านกาแฟนั้นสูงขึ้นเป็นอย่างมาก ดังนั้น ปัญหาที่ตามมาคือ การทำให้ผู้ใช้บริการร้านกาแฟต้องคอยติดตามข่าวสาร โปรโมชันและและเวลาเปิดปิดของร้านต่างๆ เพื่อเปรียบเทียบและ เข้าใช้บริการในช่วงเวลาที่เหมาะสม คงมีคนจำนวนไม่น้อยที่พบปัญหาต่างๆ อาทิเช่น อยากจะไปนั่งทำงานที่ร้านกาแฟร้านนี้ แต่พอเดินทางไปถึง ร้านปิดบริการ พอจะหาร้านกาแฟที่ใกล้เคียงก็ไม่ทราบสถานที่ตั้งเพราะไม่ได้เตรียมมาก่อน หรือแม้กระทั่งไปซื้อกาแฟไม่เคยตรงเวลากับที่ทางร้านจัดโปรโมชันต่างๆ ดังนั้นที่กล่าวมาทั้งหมดนี้คือปัญหาส่วนหนึ่งที่เกิดขึ้นกับหลายๆคน จึงเป็นที่มาของการพัฒนาแอพพลิเคชันนี้</p>
+                        </div>
+                        <div class="content" ng-if="contentMode=='sl'">
+                              <h1><i class="fa fa-cogs"></i> Solutions</h1>
+                            <p>เนื่องจากในปัจจุบันเทคโนโลยีนั้นพัฒนาไปไกล ทำให้ทุกคนสามารถเข้าถึงเทคโนโลยีได้อย่างง่ายดายและในปัจจุบันมือถือนั้นถือว่าเป็นเทคโนโลยีที่แทบจะทุกคนต้องมีติดตัวไว้เพื่อใช้ในการติดต่อสื่อสาร ดังนั้นเราจึงตัดสินใจที่จะแก้ปัญหาดังกล่าวด้วยการพัฒนาแอพพลิเคชันบนมือถือขึ้นมาโดยมีชื่อว่า Mafae โดยตัวแอพพลิเคชันจะมี features ต่างๆที่ใช้ในการแก้ปัญหาดังกล่าวให้หมดไป และทำให้ปัญหาที่กล่าวมาเป็นเรื่องง่ายทั้งต่อผู้ให้บริการและผู้ใช้บริการ</p>
+                        </div>
+                        <div class="content member" ng-if="contentMode=='mb'" ng-controller="MemberController">
+                            <h1><i class="fa fa-users"></i> Members</h1>
+                            <div class="mem animated {{m.class}}" ng-repeat="m in memberList">
+                                <img ng-src="{{m.img}}" />
+                                <p>{{m.name}}</p>
+                            </div>
+                        </div>
+                        <div class="content"ng-if="contentMode=='ct'">
+                            <h1><i class="fa fa-envelope-o"></i> Contact</h1>
+                             <p><i class="fa fa-envelope-o"></i> Email : <a href="mailto:tugg.solo@gmail.com">tugg.solo@gmail.com</a></p>
+                             <p><i class="fa fa-mobile"></i> Tel: 0862149399</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="popup demonstrate animated {{popup.demonstrate? 'zoomIn':'zoomOut'}}" ng-controller="DemonstrateController" ng-if="popup.demonstrate">
                     <div class="closePanel" ng-click="close()">
                         <img src="img/close.png" />
@@ -47,9 +60,24 @@
                         <div class="appDescription animated bounceIn" ng-if="appReady" ng-click="bootsApp()">Tap on the iPhone to start the app.</div>
                     </div>
                 </div>
+			</div>
+		</div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-6 box black" ng-click="openProblems()">
+                <h2>Problems</h2>
+                <i class="fa fa-exclamation"></i>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-6 box green">
+            <div class="col-md-3 col-sm-3 col-xs-6 box dark" ng-click="openSolutions()">
+                <h2>Solution</h2>
+                <i class="fa fa-cogs"></i>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6 box blue" ng-click="openDemo()">
+                <h2>Demonstrate</h2>
+                <i class="fa fa-desktop"></i>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6 box green" ng-click="openMembers()">
                 <h2>Members</h2>
+                <i class="fa fa-users"></i>
             </div>
         </div>
         <div class="row poweredBy">
@@ -83,8 +111,9 @@
         </div>
     </div>
 	<footer>
-		<p>copyright © by TuGG</p>
-        <p>Contact: </p>
+		<p>copyright © by TuGG 2015</p>
+        <p><i class="fa fa-envelope-o"></i> E-mail: tugg.solo@gmail.com</p>
+        <p class="contact-moble"><i class="fa fa-mobile"></i> Tel: 0862149399</p>
 	</footer>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="js/iscroll.js"></script>
@@ -100,5 +129,6 @@
     <script src="js/controllers/menu-controller.js"></script>
     <script src="js/controllers/demonstrate-controller.js"></script>
     <script src="js/controllers/app-controller.js"></script>
+    <script src="js/controllers/member-controller.js"></script>
 </body>
 </html>

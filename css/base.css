@@ -83,7 +83,14 @@ footer p {
     height: 200px;
     background:#ccc;
     box-sizing:border-box;
-    padding:10px;
+    padding:20px;
+    cursor: pointer;
+    text-align: center;
+}
+.box i {
+    font-size: 90px;
+    color: #fff;
+    margin-top: 30px;
 }
 .box h2 {
     padding:0;
@@ -137,7 +144,7 @@ h2 {
     animation-duration: .5s !important;
 }
 .closePanel {
-    width: 25px;
+    width: 30px;
     color: #000;
     cursor: pointer;
     margin: 10px;
@@ -167,16 +174,32 @@ h2 {
     max-width:100%;
     position: relative;
 }
-.appScreen {
-    width: 342px;
-    height: 560px;
-    position: absolute;
-    top: 86px;
-    left: 20px;
-    background-color: #fff;
-    animation-duration: .5s !important;
-    border-radius: 2px;
-    z-index: 99;
+.fa-mobile {
+    font-size: 25px;
+}
+p .fa-mobile {
+    font-size: 25px;
+}
+.contact-moble {
+    margin-top: -7px;
+}
+.contact-moble i {
+    position: relative;
+    top:3px;
+}
+.member img {
+    width: 100px;
+    border-radius: 50px;
+}
+.member p {
+    display: inline-block;
+    margin-left: 10px;
+}
+.member div {
+    margin-top: 20px;
+}
+.mem.ng-enter {
+    animation: slideOutDown 0.5s;
 }
 @media (max-width: 992px) {
     .logo {
