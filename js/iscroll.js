@@ -675,7 +675,7 @@ IScroll.prototype = {
 		this.maxScrollY = this.wrapperHeight - this.scrollerHeight;
 		this.maxScrollY = 481 - $('#wrapper').height();
         if($('#innerWrapper').length) {
-            this.maxScrollY = 481 - ($('#innerWrapper').height() +40);
+            this.maxScrollY = 481 - ($('#innerWrapper').height() + 60);
         }
 		console.log(this.maxScrollY);
 
